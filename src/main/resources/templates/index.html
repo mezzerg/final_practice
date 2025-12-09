@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Savings Investment Record</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="container mt-4">
+
+<h2>Savings Investment Record</h2>
+
+<!-- Error message if duplicate customer number -->
+<div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+
+<!-- Table of customers -->
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th>Customer Number</th>
+        <th>Customer Name</th>
+        <th>Customer Deposit</th>
+        <th>Number of Years</th>
+        <th>Savings Type</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="customer : ${customers}">
+        <td th:text="${customer.customerNumber}"></td>
+        <td th:text="${customer.name}"></td>
+        <td th:text="${customer.deposit}"></td>
+        <td th:text="${customer.years}"></td>
+        <td th:text="${customer.savingsType}"></td>
+        <td>
+            <a th:href="@{'/edit/' + ${customer.customerNumber}}" class="btn btn-warning btn-sm">Edit</a>
+            <a th:href="@{'/delete/' + ${customer.customerNumber}}" class="btn btn-danger btn-sm"
+               onclick="return confirm('Are you sure you want to delete this record?');">Delete</a>
+            <a th:href="@{'/project/' + ${customer.customerNumber}}" class="btn btn-info btn-sm">Projected Investment</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<!-- Add button -->
+<a href="/add" class="btn btn-primary">Add New Customer</a>
+
+</body>
+</html>

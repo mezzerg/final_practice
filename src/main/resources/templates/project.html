@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Projected Investment</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="container mt-4">
+
+<h2>Projected Investment</h2>
+
+<!-- Customer Info -->
+<p><strong>Customer Number:</strong> <span th:text="${customer.customerNumber}"></span></p>
+<p><strong>Name:</strong> <span th:text="${customer.name}"></span></p>
+<p><strong>Savings Type:</strong> <span th:text="${customer.savingsType}"></span></p>
+<p><strong>Initial Deposit:</strong> <span th:text="${customer.deposit}"></span></p>
+<p><strong>Number of Years:</strong> <span th:text="${customer.years}"></span></p>
+
+<!-- Compound Interest Table -->
+<table class="table table-bordered">
+  <thead>
+  <tr>
+    <th>Year</th>
+    <th>Starting Amount</th>
+    <th>Interest</th>
+    <th>Ending Balance</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="row : ${projection}">
+    <td th:text="${row.year}"></td>
+    <td th:text="${row.startingAmount}"></td>
+    <td th:text="${row.interest}"></td>
+    <td th:text="${row.endingBalance}"></td>
+  </tr>
+  </tbody>
+</table>
+
+<a href="/" class="btn btn-primary">Back to Records</a>
+
+</body>
+</html>
