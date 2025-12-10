@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <title>Savings Investment Record</title>
     <meta charset="UTF-8">
@@ -39,6 +39,31 @@
             <a th:href="@{'/project/' + ${customer.id}}" class="btn btn-info btn-sm">Projected Investment</a>
         </td>
     </tr>
+
+
+    <script>
+        window.addEventListener("DOMContentLoaded", function() {
+            // Handle success messages
+            const successBox = document.querySelector(".alert-success");
+            if (successBox) {
+                setTimeout(() => {
+                    successBox.style.transition = "opacity 0.5s ease";
+                    successBox.style.opacity = "0";
+                    setTimeout(() => successBox.remove(), 500);
+                }, 3000); // 3 seconds
+            }
+
+            // Handle error messages
+            const errorBox = document.querySelector(".alert-danger");
+            if (errorBox) {
+                setTimeout(() => {
+                    errorBox.style.transition = "opacity 0.5s ease";
+                    errorBox.style.opacity = "0";
+                    setTimeout(() => errorBox.remove(), 500);
+                }, 4000); // 4 seconds (slightly longer for errors)
+            }
+        });
+    </script>
     </tbody>
 </table>
 
