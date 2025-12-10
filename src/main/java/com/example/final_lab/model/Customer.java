@@ -1,11 +1,15 @@
 package com.example.final_lab.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
 public class Customer {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // internal database ID
+    private Long id;
     private int customerNumber;
     private String name;
     private double deposit;
@@ -23,6 +27,9 @@ public class Customer {
     }
 
     // Getters and setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+
     public int getCustomerNumber() { return customerNumber; }
     public void setCustomerNumber(int customerNumber) { this.customerNumber = customerNumber; }
 

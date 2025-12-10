@@ -11,10 +11,16 @@
 
 <form th:action="@{/update}" th:object="${customer}" method="post" class="form">
 
+    <!-- Error message -->
+    <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+
+    <!-- Hidden ID -->
+    <input type="hidden" th:field="*{id}">
+
     <!-- Customer Number (read-only) -->
     <div class="mb-3">
         <label for="customerNumber" class="form-label">Customer Number</label>
-        <input type="number" th:field="*{customerNumber}" class="form-control" readonly>
+        <input type="number" th:field="*{customerNumber}" class="form-control" required>
     </div>
 
     <!-- Customer Name -->
@@ -45,7 +51,7 @@
     </div>
 
     <button type="submit" class="btn btn-success">Update</button>
-    <a href="/" class="btn btn-secondary">Cancel</a>
+    <a th:href="@{/}" class="btn btn-secondary">Cancel</a>
 </form>
 
 </body>

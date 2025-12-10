@@ -33,10 +33,10 @@
         <td th:text="${customer.years}"></td>
         <td th:text="${customer.savingsType}"></td>
         <td>
-            <a th:href="@{'/edit/' + ${customer.customerNumber}}" class="btn btn-warning btn-sm">Edit</a>
-            <a th:href="@{'/delete/' + ${customer.customerNumber}}" class="btn btn-danger btn-sm"
+            <a th:href="@{'/edit/' + ${customer.id}}" class="btn btn-warning btn-sm">Edit</a>
+            <a th:href="@{'/delete/' + ${customer.id}}" class="btn btn-danger btn-sm"
                onclick="return confirm('Are you sure you want to delete this record?');">Delete</a>
-            <a th:href="@{'/project/' + ${customer.customerNumber}}" class="btn btn-info btn-sm">Projected Investment</a>
+            <a th:href="@{'/project/' + ${customer.id}}" class="btn btn-info btn-sm">Projected Investment</a>
         </td>
     </tr>
     </tbody>

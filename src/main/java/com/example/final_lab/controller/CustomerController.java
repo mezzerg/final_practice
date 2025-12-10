@@ -17,18 +17,21 @@ public class CustomerController {
     @Autowired
     private CustomerRepository customerRepository;
 
+    @Autowired
+    private ProjectionService projectionService;
+
     // Show all customers
     @GetMapping("/")
     public String index(Model model) {
         model.addAttribute("customers", customerRepository.findAll());
-        return "index"; // maps to templates/index.html
+        return "index";
     }
 
     // Show add form
     @GetMapping("/add")
     public String addForm(Model model) {
         model.addAttribute("customer", new Customer());
-        return "add"; // maps to templates/add.html
+        return "add";
     }
 
     // Save new customer
@@ -44,37 +47,49 @@ public class CustomerController {
     }
 
     // Show edit form
-    @GetMapping("/edit/{customerNumber}")
-    public String editForm(@PathVariable int customerNumber, Model model) {
-        Customer customer = customerRepository.findById(customerNumber).orElseThrow();
+    @GetMapping("/edit/{id}")
+    public String editForm(@PathVariable Long id, Model model) {
+        Customer customer = customerRepository.findById(id).orElseThrow();
         model.addAttribute("customer", customer);
-        return "edit"; // maps to templates/edit.html
+        return "edit";
     }
 
     // Update customer
     @PostMapping("/update")
-    public String updateCustomer(@ModelAttribute Customer customer) {
+    public String updateCustomer(@ModelAttribute Customer customer, Model model) {
+
+        // Check if another record already has this customerNumber
+        Customer duplicate = customerRepository.findAll().stream()
+                .filter(c -> c.getCustomerNumber() == customer.getCustomerNumber()
+                        && !c.getId().equals(customer.getId()))
+                .findFirst()
+                .orElse(null);
+
+        if (duplicate != null) {
+            model.addAttribute("error", "Customer number already exists!");
+            model.addAttribute("customer", customer);
+            return "edit";
+        }
+
         customerRepository.save(customer);
         return "redirect:/";
     }
 
     // Delete customer
-    @GetMapping("/delete/{customerNumber}")
-    public String deleteCustomer(@PathVariable int customerNumber) {
-        customerRepository.deleteById(customerNumber);
+    @GetMapping("/delete/{id}")
+    public String deleteCustomer(@PathVariable Long id) {
+        customerRepository.deleteById(id);
         return "redirect:/";
     }
 
     // Projected Investment
-    @GetMapping("/project/{customerNumber}")
-    public String projectInvestment(@PathVariable int customerNumber, Model model) {
-        Customer customer = customerRepository.findById(customerNumber).orElseThrow();
-        ProjectionService service = new ProjectionService();
-        List<Map<String, Object>> projection = service.calculateProjection(customer);
+    @GetMapping("/project/{id}")
+    public String projectInvestment(@PathVariable Long id, Model model) {
+        Customer customer = customerRepository.findById(id).orElseThrow();
+        List<Map<String, Object>> projection = projectionService.calculateProjection(customer);
 
         model.addAttribute("customer", customer);
         model.addAttribute("projection", projection);
-
-        return "project"; // maps to templates/project.html
+        return "project";
     }
 }

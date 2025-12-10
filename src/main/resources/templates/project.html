@@ -10,11 +10,11 @@
 <h2>Projected Investment</h2>
 
 <!-- Customer Info -->
-<p><strong>Customer Number:</strong> <span th:text="${customer.customerNumber}"></span></p>
+<p><strong>Projected table of Customer Number:</strong> <span th:text="${customer.customerNumber}"></span></p>
 <p><strong>Name:</strong> <span th:text="${customer.name}"></span></p>
-<p><strong>Savings Type:</strong> <span th:text="${customer.savingsType}"></span></p>
-<p><strong>Initial Deposit:</strong> <span th:text="${customer.deposit}"></span></p>
-<p><strong>Number of Years:</strong> <span th:text="${customer.years}"></span></p>
+<!--<p><strong>Savings Type:</strong> <span th:text="${customer.savingsType}"></span></p>-->
+<!--<p><strong>Initial Deposit:</strong> <span th:text="${customer.deposit}"></span></p>-->
+<!--<p><strong>Number of Years:</strong> <span th:text="${customer.years}"></span></p>-->
 
 <!-- Compound Interest Table -->
 <table class="table table-bordered">
@@ -36,7 +36,7 @@
   </tbody>
 </table>
 
-<a href="/" class="btn btn-primary">Back to Records</a>
+<a th:href="@{/}" class="btn btn-primary">Back to Records</a>
 
 </body>
 </html>
