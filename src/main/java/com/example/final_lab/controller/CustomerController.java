@@ -38,7 +38,7 @@ public class CustomerController {
     @PostMapping("/save")
     public String saveCustomer(@ModelAttribute Customer customer, Model model) {
         if (customerRepository.existsByCustomerNumber(customer.getCustomerNumber())) {
-            model.addAttribute("error", "Customer number already exists!");
+            model.addAttribute("error", "The record you  are trying to add is already existing. Choose a different customer number");
             model.addAttribute("customers", customerRepository.findAll());
             return "index";
         }
