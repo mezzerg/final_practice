@@ -18,7 +18,8 @@ public class Customer {
 
     public Customer() {}
 
-    public Customer(int customerNumber, String name, double deposit, int years, String savingsType) {
+    public Customer(Long id, int customerNumber, String name, double deposit, int years, String savingsType) {
+        this.id = null;
         this.customerNumber = customerNumber;
         this.name = name;
         this.deposit = deposit;
